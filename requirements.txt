@@ -6,7 +6,8 @@ requests
 python-dotenv
 joblib
 folium
-streamlit
+streamlit==1.45.0
 fastapi
 uvicorn
 plotly
+altair==5.5.0
