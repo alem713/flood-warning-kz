@@ -389,7 +389,11 @@ with tab2:
             "Time": [f["🕐 Time"] for f in sim_forecasts],
             "Risk Score": [risk_map_num.get(f["⚠️ Risk"].split(" ")[-1], 0) for f in sim_forecasts],
         }).set_index("Time")
-        st.line_chart(chart_data)
+        import plotly.express as px
+        fig = px.line(chart_data.reset_index(), x="Time", y="Risk Score",
+              title="72-Hour Risk Forecast (Simulated)",
+              template="plotly_dark")
+        st.plotly_chart(fig, use_container_width=True)
 
 # ── TAB 3: Blockchain ─────────────────────────────────────────────────────────
 with tab3:
