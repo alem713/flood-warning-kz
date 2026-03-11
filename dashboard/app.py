@@ -356,7 +356,11 @@ with tab2:
             "Risk Score": [risk_map_num.get(p["⚠️ Risk"].split(" ")[-1], 0) for p in forecast_preds],
             "Rainfall": [p["🌧️ Rain (mm)"] for p in forecast_preds],
         })
-        st.line_chart(chart_data.set_index("Time")[["Risk Score", "Rainfall"]])
+        import plotly.express as px
+        fig = px.line(chart_data, x="Time", y=["Risk Score", "Rainfall"],
+              title="72-Hour Risk & Rainfall Trend",
+              template="plotly_dark")
+        st.plotly_chart(fig, use_container_width=True)
     else:
         # Simulated 72hr forecast
         st.info("📡 Add OpenWeatherMap API key for live forecast. Showing simulated data:")
