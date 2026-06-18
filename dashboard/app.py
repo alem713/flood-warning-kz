@@ -66,6 +66,24 @@ st.markdown(
             color: rgba(255,255,255,0.72);
             font-size: 1rem;
         }
+        .guide-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 18px;
+            padding: 0.9rem 1rem;
+            height: 100%;
+        }
+        .guide-step {
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+        }
+        .guide-text {
+            margin-top: 0.35rem;
+            font-size: 0.98rem;
+            line-height: 1.35;
+        }
     </style>
     """,
     unsafe_allow_html=True,
@@ -84,9 +102,9 @@ LANG = {
         "river": "River Level (m)",
         "snow": "Snow Melt (mm)",
         "prev_rain": "Recent Rain (mm)",
-        "check_btn": "Check City",
-        "predict_all": "Refresh Live Data",
-        "new_weather": "Rebuild Estimates",
+        "check_btn": "Analyze City",
+        "predict_all": "Use live data for map",
+        "new_weather": "Use estimated data",
         "real_weather": "Use Live Weather",
         "low": "Low",
         "medium": "Medium",
@@ -97,6 +115,43 @@ LANG = {
         "risk_map": "Kazakhstan Risk Map",
         "forecast": "72-Hour Forecast",
         "blockchain": "Relief Tracker",
+        "city_label": "City",
+        "quick_start": "Quick start",
+        "step_one": "Choose a city and language.",
+        "step_two": "Keep live weather on for real data, or turn it off for estimates.",
+        "step_three": "Press the analyze button to get the current risk.",
+        "wind": "Wind",
+        "weather_source": "Weather source",
+        "current_risk": "Current risk",
+        "current_confidence": "Confidence",
+        "analysis_mode": "Analysis mode",
+        "match_selected": "Match selected city source",
+        "map_help": "Live data keeps the map close to current weather. Estimated data gives a stable demo view.",
+        "forecast_note_estimated": "Live forecast is unavailable, so estimated regional data is shown instead.",
+        "forecast_note_live": "Live forecast data is being used.",
+        "ledger_intro": "Transparent record of disaster relief fund distribution",
+        "ledger_title": "Transaction ledger",
+        "ledger_total": "Total distributed",
+        "ledger_transactions": "Transactions",
+        "ledger_regions": "Regions helped",
+        "request_title": "Submit new relief request",
+        "request_button": "Submit request",
+        "region_label": "Region",
+        "amount_label": "Amount (₸)",
+        "reason_label": "Reason",
+        "priority_label": "Priority",
+        "reason_placeholder": "Describe the flood damage...",
+        "request_submitted": "Request submitted.",
+        "time_col": "Time",
+        "weather_col": "Weather",
+        "temp_col": "Temp (°C)",
+        "rain_col": "Rain (mm)",
+        "humidity_col": "Humidity",
+        "risk_col": "Risk",
+        "source_col": "Source",
+        "tx_col": "TX",
+        "status_col": "Status",
+        "date_col": "Date",
         "critical_alert": "Critical alert",
         "high_alert": "High risk",
         "immediate": "Immediate action required!",
@@ -116,9 +171,9 @@ LANG = {
         "river": "Өзен деңгейі (м)",
         "snow": "Қар ерігені (мм)",
         "prev_rain": "Соңғы жауын (мм)",
-        "check_btn": "Қаланы тексеру",
-        "predict_all": "Тікелей деректерді жаңарту",
-        "new_weather": "Бағалауды қайта құру",
+        "check_btn": "Қаланы талдау",
+        "predict_all": "Картаға тікелей деректер",
+        "new_weather": "Бағаланған деректер",
         "real_weather": "Тікелей ауа райы",
         "low": "Төмен",
         "medium": "Орташа",
@@ -129,6 +184,43 @@ LANG = {
         "risk_map": "Қазақстан қауіп картасы",
         "forecast": "72 сағаттық болжам",
         "blockchain": "Көмек трекері",
+        "city_label": "Қала",
+        "quick_start": "Жылдам бастау",
+        "step_one": "Қаланы және тілді таңдаңыз.",
+        "step_two": "Нақты дерек үшін тікелей ауа райын қосулы қалдырыңыз, ал бағалау үшін өшіріңіз.",
+        "step_three": "Қазіргі қауіп мәнін көру үшін талдау батырмасын басыңыз.",
+        "wind": "Жел",
+        "weather_source": "Ауа райы көзі",
+        "current_risk": "Қазіргі қауіп",
+        "current_confidence": "Сенімділік",
+        "analysis_mode": "Талдау режимі",
+        "match_selected": "Таңдалған қаланың дерегін қолдану",
+        "map_help": "Тікелей деректер картаны нақты ауа райына жақын ұстайды. Бағаланған деректер тұрақты демо көрініс береді.",
+        "forecast_note_estimated": "Тікелей болжам қолжетімсіз, сондықтан бағаланған деректер көрсетіледі.",
+        "forecast_note_live": "Тікелей болжам деректері қолданылып тұр.",
+        "ledger_intro": "Төтенше көмек қаржысының ашық есебі",
+        "ledger_title": "Транзакция журналы",
+        "ledger_total": "Жалпы бөлінді",
+        "ledger_transactions": "Транзакциялар",
+        "ledger_regions": "Көмек алған өңірлер",
+        "request_title": "Жаңа көмек сұрауын жіберу",
+        "request_button": "Сұрау жіберу",
+        "region_label": "Өңір",
+        "amount_label": "Сома (₸)",
+        "reason_label": "Себеп",
+        "priority_label": "Басымдық",
+        "reason_placeholder": "Су тасқынының зардабын сипаттаңыз...",
+        "request_submitted": "Сұрау жіберілді.",
+        "time_col": "Уақыт",
+        "weather_col": "Ауа райы",
+        "temp_col": "Темп. (°C)",
+        "rain_col": "Жауын (мм)",
+        "humidity_col": "Ылғалдылық",
+        "risk_col": "Қауіп",
+        "source_col": "Көз",
+        "tx_col": "TX",
+        "status_col": "Күй",
+        "date_col": "Күні",
         "critical_alert": "Қауіпті ескерту",
         "high_alert": "Жоғары қауіп",
         "immediate": "Дереу шара қолдану қажет!",
@@ -148,9 +240,9 @@ LANG = {
         "river": "Уровень реки (м)",
         "snow": "Таяние снега (мм)",
         "prev_rain": "Последний дождь (мм)",
-        "check_btn": "Проверить город",
-        "predict_all": "Обновить живые данные",
-        "new_weather": "Пересобрать оценки",
+        "check_btn": "Анализировать город",
+        "predict_all": "Живые данные для карты",
+        "new_weather": "Оценочные данные",
         "real_weather": "Живая погода",
         "low": "Низкий",
         "medium": "Средний",
@@ -161,6 +253,43 @@ LANG = {
         "risk_map": "Карта рисков Казахстана",
         "forecast": "Прогноз на 72 часа",
         "blockchain": "Трекер помощи",
+        "city_label": "Город",
+        "quick_start": "Быстрый старт",
+        "step_one": "Выберите город и язык.",
+        "step_two": "Оставьте реальную погоду включённой для живых данных или выключите для оценки.",
+        "step_three": "Нажмите кнопку анализа, чтобы увидеть текущий риск.",
+        "wind": "Ветер",
+        "weather_source": "Источник погоды",
+        "current_risk": "Текущий риск",
+        "current_confidence": "Уверенность",
+        "analysis_mode": "Режим анализа",
+        "match_selected": "Сопоставить источник выбранного города",
+        "map_help": "Живые данные держат карту ближе к текущей погоде. Оценочные данные дают стабильный демо-вид.",
+        "forecast_note_estimated": "Живой прогноз недоступен, поэтому показаны оценочные региональные данные.",
+        "forecast_note_live": "Используются живые данные прогноза.",
+        "ledger_intro": "Прозрачный реестр распределения средств помощи при бедствии",
+        "ledger_title": "Журнал транзакций",
+        "ledger_total": "Всего распределено",
+        "ledger_transactions": "Транзакции",
+        "ledger_regions": "Помогли регионам",
+        "request_title": "Отправить новый запрос помощи",
+        "request_button": "Отправить запрос",
+        "region_label": "Регион",
+        "amount_label": "Сумма (₸)",
+        "reason_label": "Причина",
+        "priority_label": "Приоритет",
+        "reason_placeholder": "Опишите ущерб от паводка...",
+        "request_submitted": "Запрос отправлен.",
+        "time_col": "Время",
+        "weather_col": "Погода",
+        "temp_col": "Темп. (°C)",
+        "rain_col": "Осадки (мм)",
+        "humidity_col": "Влажность",
+        "risk_col": "Риск",
+        "source_col": "Источник",
+        "tx_col": "TX",
+        "status_col": "Статус",
+        "date_col": "Дата",
         "critical_alert": "Критическое предупреждение",
         "high_alert": "Высокий риск",
         "immediate": "Требуются немедленные действия!",
@@ -215,7 +344,9 @@ def get_forecast_snapshot(region):
     return build_estimated_forecast(region), "estimated"
 
 
-lang_choice = st.sidebar.selectbox("Language / Тіл / Язык", ["EN", "KZ", "RU"])
+language_options = [("English", "EN"), ("Қазақша", "KZ"), ("Русский", "RU")]
+selected_language_name = st.sidebar.selectbox("Language", [label for label, _ in language_options])
+lang_choice = next(code for label, code in language_options if label == selected_language_name)
 T = LANG[lang_choice]
 
 st.markdown(
@@ -228,6 +359,23 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+guide_1, guide_2, guide_3 = st.columns(3)
+for column, step, text in [
+    (guide_1, "1", T["step_one"]),
+    (guide_2, "2", T["step_two"]),
+    (guide_3, "3", T["step_three"]),
+]:
+    with column:
+        st.markdown(
+            f"<div class='guide-card'><div class='guide-step'>{T['quick_start']} {step}</div><div class='guide-text'>{text}</div></div>",
+            unsafe_allow_html=True,
+        )
+
+st.sidebar.header(T["quick_start"])
+st.sidebar.markdown(f"1. {T['step_one']}")
+st.sidebar.markdown(f"2. {T['step_two']}")
+st.sidebar.markdown(f"3. {T['step_three']}")
+st.sidebar.divider()
 st.sidebar.header(T["check_city"])
 selected_city = st.sidebar.selectbox(T["select_city"], list(REGIONS.keys()))
 prefer_live = st.sidebar.toggle(T["real_weather"], value=True)
@@ -236,7 +384,7 @@ weather = get_weather_snapshot(selected_city, prefer_live=prefer_live)
 
 st.sidebar.caption(f"{T['real_data'] if weather['source'] == 'live' else T['simulated']}: {weather['description']}")
 if "wind_speed" in weather:
-    st.sidebar.caption(f"Wind: {weather['wind_speed']} m/s")
+    st.sidebar.caption(f"{T['wind']}: {weather['wind_speed']} m/s")
 
 rainfall = st.sidebar.slider(T["rainfall"], 0.0, 120.0, float(weather["rainfall_mm"]))
 temperature = st.sidebar.slider(T["temperature"], -10.0, 35.0, float(weather["temperature_c"]))
@@ -274,10 +422,10 @@ if "city_result" in st.session_state:
 
 preview = predict_risk(selected_city, rainfall, temperature, humidity, river_level, snow_melt, prev_rain)
 summary_a, summary_b, summary_c, summary_d = st.columns(4)
-summary_a.metric("City", selected_city)
-summary_b.metric("Weather source", T["real_data"] if weather["source"] == "live" else T["simulated"])
-summary_c.metric("Current risk", preview["risk_level"])
-summary_d.metric("Confidence", preview["confidence"])
+summary_a.metric(T["city_label"], selected_city)
+summary_b.metric(T["weather_source"], T["real_data"] if weather["source"] == "live" else T["simulated"])
+summary_c.metric(T["current_risk"], preview["risk_level"])
+summary_d.metric(T["current_confidence"], preview["confidence"])
 st.divider()
 
 tab1, tab2, tab3 = st.tabs([T["risk_map"], T["forecast"], T["blockchain"]])
@@ -287,6 +435,7 @@ with tab1:
     if "map_mode" not in st.session_state:
         st.session_state.map_mode = "live" if prefer_live else "estimated"
 
+    st.caption(T["map_help"])
     with mode_col_1:
         if st.button(T["predict_all"], type="primary", use_container_width=True):
             st.session_state.map_mode = "live"
@@ -294,7 +443,7 @@ with tab1:
         if st.button(T["new_weather"], use_container_width=True):
             st.session_state.map_mode = "estimated"
     with mode_col_3:
-        if st.button("Use selected city source", use_container_width=True):
+        if st.button(T["match_selected"], use_container_width=True):
             st.session_state.map_mode = "live" if weather["source"] == "live" else "estimated"
 
     with st.spinner("Updating risk map..."):
@@ -363,12 +512,12 @@ with tab1:
         table = pd.DataFrame(
             [
                 {
-                    "Region": item["region"],
-                    "Risk": item["risk_level"],
+                    T["region_label"]: item["region"],
+                    T["risk_col"]: item["risk_level"],
                     T["confidence"]: item["confidence"],
-                    "Rain (mm)": item["rainfall_mm"],
+                    T["rain_col"]: item["rainfall_mm"],
                     "River (m)": item["river_level_m"],
-                    "Source": item["source"],
+                    T["source_col"]: item["source"],
                 }
                 for item in predictions
             ]
@@ -386,7 +535,9 @@ with tab2:
     st.subheader(f"{T['forecast']} — {selected_city}")
     forecast_data, forecast_source = get_forecast_snapshot(selected_city)
     if forecast_source == "estimated":
-        st.info("Live forecast is unavailable, so estimated regional data is shown instead.")
+        st.info(T["forecast_note_estimated"])
+    else:
+        st.caption(T["forecast_note_live"])
 
     forecast_rows = []
     for row in forecast_data:
@@ -401,14 +552,14 @@ with tab2:
         )
         forecast_rows.append(
             {
-                "Time": row["datetime"],
-                "Weather": row["description"],
-                "Temp (°C)": row["temperature_c"],
-                "Rain (mm)": row["rainfall_mm"],
-                "Humidity": f"{row['humidity_pct']}%",
-                "Risk": result["risk_level"],
-                "Confidence": result["confidence"],
-                "Source": T["real_data"] if row.get("source") == "live" else T["simulated"],
+                T["time_col"]: row["datetime"],
+                T["weather_col"]: row["description"],
+                T["temp_col"]: row["temperature_c"],
+                T["rain_col"]: row["rainfall_mm"],
+                T["humidity_col"]: f"{row['humidity_pct']}%",
+                T["risk_col"]: result["risk_level"],
+                T["confidence"]: result["confidence"],
+                T["source_col"]: T["real_data"] if row.get("source") == "live" else T["simulated"],
             }
         )
 
@@ -418,9 +569,9 @@ with tab2:
     risk_map_num = {"Low": 0, "Medium": 1, "High": 2, "Critical": 3}
     chart_data = pd.DataFrame(
         {
-            "Time": [item["Time"] for item in forecast_rows],
-            "Risk Score": [risk_map_num[item["Risk"]] for item in forecast_rows],
-            "Rainfall": [item["Rain (mm)"] for item in forecast_rows],
+            T["time_col"]: [item[T["time_col"]] for item in forecast_rows],
+            "Risk Score": [risk_map_num[item[T["risk_col"]]] for item in forecast_rows],
+            T["rain_col"]: [item[T["rain_col"]] for item in forecast_rows],
         }
     )
 
@@ -428,8 +579,8 @@ with tab2:
 
     fig = px.line(
         chart_data,
-        x="Time",
-        y=["Risk Score", "Rainfall"],
+        x=T["time_col"],
+        y=["Risk Score", T["rain_col"]],
         title="72-Hour Risk and Rainfall Trend",
         template="plotly_dark",
     )
@@ -437,34 +588,43 @@ with tab2:
 
 with tab3:
     st.subheader(T["blockchain"])
-    st.markdown("Transparent record of disaster relief fund distribution")
+    st.markdown(T["ledger_intro"])
 
     m1, m2, m3 = st.columns(3)
-    m1.metric("Total distributed", "₸ 20,600,000")
-    m2.metric("Transactions", "6 verified")
-    m3.metric("Regions helped", "6 regions")
+    m1.metric(T["ledger_total"], "₸ 20,600,000")
+    m2.metric(T["ledger_transactions"], "6 verified")
+    m3.metric(T["ledger_regions"], "6 regions")
 
     st.divider()
-    st.markdown("### Transaction ledger")
-    st.dataframe(pd.DataFrame(RELIEF_DATA), use_container_width=True)
+    st.markdown(f"### {T['ledger_title']}")
+    ledger_df = pd.DataFrame(RELIEF_DATA).rename(
+        columns={
+            "tx": T["tx_col"],
+            "region": T["region_label"],
+            "amount": T["amount_label"],
+            "status": T["status_col"],
+            "date": T["date_col"],
+        }
+    )
+    st.dataframe(ledger_df, use_container_width=True)
 
     st.divider()
-    st.markdown("### Submit new relief request")
+    st.markdown(f"### {T['request_title']}")
     col_a, col_b = st.columns(2)
     with col_a:
-        req_region = st.selectbox("Region", list(REGIONS.keys()))
-        req_amount = st.number_input("Amount (₸)", min_value=100000, value=1000000, step=100000)
+        req_region = st.selectbox(T["region_label"], list(REGIONS.keys()))
+        req_amount = st.number_input(T["amount_label"], min_value=100000, value=1000000, step=100000)
     with col_b:
-        req_reason = st.text_area("Reason", placeholder="Describe the flood damage...")
-        req_priority = st.selectbox("Priority", ["Critical", "High", "Medium"])
+        req_reason = st.text_area(T["reason_label"], placeholder=T["reason_placeholder"])
+        req_priority = st.selectbox(T["priority_label"], ["Critical", "High", "Medium"])
 
-    if st.button("Submit request", type="primary"):
+    if st.button(T["request_button"], type="primary"):
         import hashlib
         import time
 
         tx_hash = "0x" + hashlib.md5(f"{req_region}{req_amount}{time.time()}".encode()).hexdigest()[:8] + "..." + hashlib.md5(str(time.time()).encode()).hexdigest()[:4]
         st.success(
-            f"Transaction submitted.\n\nTX Hash: `{tx_hash}`\n\nRegion: {req_region} | Amount: ₸ {req_amount:,} | Priority: {req_priority}"
+            f"{T['request_submitted']}\n\nTX Hash: `{tx_hash}`\n\n{T['region_label']}: {req_region} | {T['amount_label']}: ₸ {req_amount:,} | {T['priority_label']}: {req_priority}"
         )
 
 st.caption(T["powered"])
