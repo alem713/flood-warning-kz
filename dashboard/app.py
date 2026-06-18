@@ -325,4 +325,4 @@ html(map_view._repr_html_(), height=500)
 with st.expander(T["how_to_read"], expanded=False):
     st.write(T["how_to_read_text"])
 
-st.caption("Powered by XGBoost ML | 84% Accuracy | Decentrathon 5.0")
+st.caption("Powered by XGBoost ML | 84% Accuracy")
