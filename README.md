@@ -34,6 +34,18 @@ Run the dashboard:
 streamlit run dashboard/app.py
 ```
 
+If you want the app to keep restarting on Windows, use:
+
+```powershell
+.\run_dashboard.ps1
+```
+
+Or double-click:
+
+```text
+run_dashboard.bat
+```
+
 Run the API:
 
 ```bash
@@ -47,6 +59,7 @@ uvicorn api.main:app --reload
 - Live weather data is preferred when an OpenWeatherMap API key is provided.
 - The fallback weather path is deterministic, not random, so the app feels stable.
 - The current "recent rain" feature is a rainfall proxy used by the model input pipeline.
+- `run_dashboard.ps1` will restart Streamlit if it exits.
 
 ## Main files
 
