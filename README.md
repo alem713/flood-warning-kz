@@ -46,6 +46,12 @@ Or double-click:
 run_dashboard.bat
 ```
 
+For a fully hidden background start, run:
+
+```text
+start_dashboard.vbs
+```
+
 Run the API:
 
 ```bash
@@ -60,6 +66,8 @@ uvicorn api.main:app --reload
 - The fallback weather path is deterministic, not random, so the app feels stable.
 - The current "recent rain" feature is a rainfall proxy used by the model input pipeline.
 - `run_dashboard.ps1` will restart Streamlit if it exits.
+- `start_dashboard.vbs` starts the watchdog without opening a visible console window.
+- `run_dashboard.bat` now opens the hidden launcher.
 
 ## Main files
 

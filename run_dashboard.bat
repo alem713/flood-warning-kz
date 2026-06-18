@@ -1,2 +1,2 @@
 @echo off
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0run_dashboard.ps1"
+start "" "%~dp0start_dashboard.vbs"
