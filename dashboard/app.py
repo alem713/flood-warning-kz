@@ -205,6 +205,15 @@ def risk_order(level):
     return {"Low": 0, "Medium": 1, "High": 2, "Critical": 3}.get(level, 0)
 
 
+def localized_risk(level, text):
+    return {
+        "Low": text["low"],
+        "Medium": text["medium"],
+        "High": text["high"],
+        "Critical": text["critical"],
+    }.get(level, level)
+
+
 language_choices = [("English", "EN"), ("Қазақша", "KZ"), ("Русский", "RU")]
 selected_language_name = st.sidebar.selectbox(
     "Language", [label for label, _ in language_choices]
@@ -262,7 +271,7 @@ live_count = sum(1 for item in snapshots if item["source"] == T["live"])
 avg_confidence = sum(float(item["confidence"].strip("%")) for item in snapshots) / len(snapshots)
 
 summary_a, summary_b, summary_c, summary_d = st.columns(4)
-summary_a.metric(T["overall"], worst["risk_level"])
+summary_a.metric(T["overall"], localized_risk(worst["risk_level"], T))
 summary_b.metric(T["attention"], f"{len(attention)} {T['top_regions'].lower()}")
 summary_c.metric(T["source"], f"{live_count} / {len(snapshots)}")
 summary_d.metric(T["confidence"], f"{avg_confidence:.1f}%")
@@ -270,10 +279,15 @@ st.caption(T["source_note"])
 st.caption(T["results_note"])
 st.divider()
 
+localized_attention = ", ".join(item["region"] for item in attention[:5])
 if worst["risk_level"] == "Critical":
-    st.error(f"{T['critical_alert']}: {', '.join(item['region'] for item in attention[:5])} — {T['immediate']}")
+    st.error(
+        f"{T['critical_alert']}: {localized_risk(worst['risk_level'], T)} — {localized_attention} — {T['immediate']}"
+    )
 elif worst["risk_level"] == "High":
-    st.warning(f"{T['high_alert']}: {', '.join(item['region'] for item in attention[:5])} — {T['monitor']}")
+    st.warning(
+        f"{T['high_alert']}: {localized_risk(worst['risk_level'], T)} — {localized_attention} — {T['monitor']}"
+    )
 elif worst["risk_level"] == "Medium":
     st.info(T["no_risk"])
 else:
@@ -281,15 +295,15 @@ else:
 
 st.markdown(f"### {T['top_regions']}")
 top_rows = pd.DataFrame(
-    [
-        {
-            T["risk_region"]: item["region"],
-            T["risk_level"]: item["risk_level"],
-            T["confidence"]: item["confidence"],
-            T["rainfall"]: item["rainfall_mm"],
-            T["river"]: item["river_level_m"],
-            T["weather_source"]: item["source"],
-        }
+        [
+            {
+                T["risk_region"]: item["region"],
+                T["risk_level"]: localized_risk(item["risk_level"], T),
+                T["confidence"]: item["confidence"],
+                T["rainfall"]: item["rainfall_mm"],
+                T["river"]: item["river_level_m"],
+                T["weather_source"]: item["source"],
+            }
         for item in sorted(snapshots, key=lambda item: risk_order(item["risk_level"]), reverse=True)[:5]
     ]
 )
@@ -310,14 +324,14 @@ for item in snapshots:
         fill_opacity=0.85,
         popup=folium.Popup(
             f"<b>{item['region']}</b><br>"
-            f"Risk: {item['risk_level']}<br>"
+            f"{T['risk_level']}: {localized_risk(item['risk_level'], T)}<br>"
             f"{T['confidence']}: {item['confidence']}<br>"
             f"{T['rainfall']}: {item['rainfall_mm']} mm<br>"
             f"{T['river']}: {item['river_level_m']} m<br>"
             f"{T['weather_source']}: {item['source']}",
             max_width=220,
         ),
-        tooltip=f"{item['region']}: {item['risk_level']}",
+        tooltip=f"{item['region']}: {localized_risk(item['risk_level'], T)}",
     ).add_to(map_view)
 
 html(map_view._repr_html_(), height=500)
